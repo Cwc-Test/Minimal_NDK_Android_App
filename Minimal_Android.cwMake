@@ -47,7 +47,7 @@ aapt list	    "{pBinOut}{sApkName}"
 >
 adb devices
 >
-adb install -r  "{pBinOut}{pApkName}"
+adb install -r  "{pBinOut}{sApkName}"
 >
 adb shell am start -n {sPckName}/{sMainActivity}
 >
