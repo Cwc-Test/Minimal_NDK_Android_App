@@ -17,6 +17,7 @@
 -{sKeyPass}= 123456
 >
 -c {pJava}Android/Wrapper/ -o {pObj}CppObj/ 
+-fPIC
 >
 -o {pObj}CppObj/  -#To _out/{_sPlatform}_{_sOpt}/App.* -llog -landroid -lEGL -lGLESv2
 >
@@ -49,11 +50,16 @@ adb devices
 >
 adb install -r  "{pBinOut}{sApkName}"
 >
+adb logcat -b crash --clear
+>
 adb shell am start -n {sPckName}/{sMainActivity}
 >
-;(Ask 2 time, to be sure getting PID)
-adb shell pidof -s {sPckName}
+adb shell pidof -s {sPckName}  -#RetryForInput
 >
-adb logcat --pid=[adb shell pidof -s {sPckName}]
+adb logcat --pid=[adb shell pidof -s {sPckName}] -#CloseWhen "beginning of crash"
+>
+adb logcat -b crash -v time -d
+>
+ndk-stack -sym {pObj}build/apk/{pLib_ABI} [<< adb logcat  -d -b crash ]
 >
 
