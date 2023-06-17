@@ -1,0 +1,14 @@
+;Register Cwc before using a .cwmake
+>
+-{_sOpt}="Debug"
+>
+-{_wToolchain}= VLianceTool/DroidRT
+>
+adb devices
+>
+;Connect your phone by USB
+adb tcpip 5555
+>
+;Then enter your phone ip to dev wirelessly (also you must enable: Settings/Developer => toggle on Wireless debugging)
+adb connect 192.168.2.10
+>
